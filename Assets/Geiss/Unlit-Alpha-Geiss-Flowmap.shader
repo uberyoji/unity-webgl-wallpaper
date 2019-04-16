@@ -45,8 +45,8 @@ SubShader {
             sampler2D _MainTex;
 			sampler2D _FlowTex;
             float4 _MainTex_ST;
-			fixed4 _Color;
-			fixed _FlowIntensity;
+			float4 _Color;
+			float _FlowIntensity;
 
             v2f vert (appdata_t v)
             {
