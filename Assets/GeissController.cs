@@ -2,19 +2,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// Need to create a chain TexCam (depth 0), GeissCam (depth 1), Camera (depth 2)
+
+// TexCam is used to generate texture and binds it to MatA
+// GeissCam uses MatA and MatB to generate texture and binds it to MatC
+// Camera uses MatC to display final result
+// Render textures are swapped between MatB and MatC to feedback the result into the GeissCam combine
+
 public class GeissController : MonoBehaviour
 {
-    public Camera TexCam;
+    public Camera SourceCam;
     
-    public Material MatA;
-    public Material MatB;
-    public Material MatC;
+    public Material MatA;   // Combine source A
+    public Material MatB;   // Combine source B
+    public Material MatC;   // Combine result
 
     public RenderTexture[] RT;
 
     int Index = 0;
 
-    Camera Cam; // current camera
+    Camera GeissCam; // current camera
 
     public RenderTexture RTA { get { return RT[0]; } }
     public RenderTexture RTB { get { return RT[Index == 0 ? 1 : 2]; } }
@@ -22,27 +29,21 @@ public class GeissController : MonoBehaviour
 
     private void Start()
     {
-        Cam = GetComponent<Camera>();
+        GeissCam = GetComponent<Camera>();
+        SourceCam.SetTargetBuffers(RTA.colorBuffer, RTA.depthBuffer);
     }
 
     void OnPreRender()
     {
         MatA.mainTexture = RTA;
         MatB.mainTexture = RTB;
-        Cam.SetTargetBuffers(RTC.colorBuffer, RTC.depthBuffer);
+        MatC.mainTexture = RTC;
+        GeissCam.SetTargetBuffers(RTC.colorBuffer, RTC.depthBuffer);
     }
 
     public void OnPostRender()
     {
-        // Output final
-        MatC.mainTexture = RTC;
-
         // Cycles buffers
-        Index = ++Index % 2; // RT.Length;
-
-        // Update texture camera
-        TexCam.SetTargetBuffers(RTA.colorBuffer, RTA.depthBuffer);
-
-//        Debug.Log("Texture Swap (" + Index + ")");
+        Index = ++Index % 2;
     }
 }
