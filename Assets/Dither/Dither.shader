@@ -77,6 +77,7 @@
 			sampler2D _DitherTex;
             float4 _MainTex_ST;
 			float4 _DitherTex_TexelSize;
+			float _DownScale;
 
             v2f vert (appdata v)
             {
@@ -94,8 +95,8 @@
 				float3 c1 = subPalette[int(idx)];
 				float3 c2 = subPalette[int(idx) + 1];
 				
-				float dith = tex2D(_DitherTex, pixel * _DitherTex_TexelSize.xy).r;
-				float mixAmt = float(frac(idx) > dith);
+				float dith = tex2D(_DitherTex, pixel * _DownScale * _DitherTex_TexelSize.xy).r;
+				float mixAmt = float( frac(idx) > dith );
 
 				return lerp(c1, c2, mixAmt);
 			}
