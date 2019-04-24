@@ -4,7 +4,8 @@
     {
         _MainTex ("Texture", 2D) = "white" {}
 		_PalTex("Palette", 2D) = "white" {}
-		_DitherTex("Texture", 2D) = "white" {}
+		_DitherTex("Dither Pattern", 2D) = "white" {}
+		_DownScale("Down Scale", float) = 1
 	}
 		SubShader
 	{
@@ -23,15 +24,40 @@
 
 			#define RGB(r,g,b) (float3(r,g,b) / 255.0)
 
-			#define SUB_PALETTE_SIZE 4
+			/*
+			#define SUB_PALETTE_SIZE 6
 
-			static float3 subPalette[4] =
+			static float3 subPalette[6] =
 			{
-				RGB(0,  0,  0),
-				RGB(152, 75, 67),
-				RGB(121,193,200),
-				RGB(255,255,255),
+				RGB(0x00, 0x00, 0x00),
+				RGB(0x57, 0x17, 0x07), //
+				RGB(0xDF, 0x4F, 0x07), //
+				RGB(0xCF, 0x7F, 0x0F), //
+				RGB(0xBF, 0xA7, 0x27), //
+				RGB(0xFF,0xFF,0xFF),
 			};
+			*/
+
+		
+		#define SUB_PALETTE_SIZE 8
+
+			static float3 subPalette[8] =
+			{
+				RGB(0x00, 0x00, 0x00),
+
+				RGB(0x07, 0x07, 0x07),
+				RGB(0x57, 0x17, 0x07), //
+//				RGB(0x9F, 0x2F, 0x07), // 
+				RGB(0xDF, 0x4F, 0x07), //
+//				RGB(0xD7, 0x5F, 0x07), //
+				RGB(0xCF, 0x7F, 0x0F), //
+//				RGB(0xC7, 0x97, 0x1F), //
+				RGB(0xBF, 0xA7, 0x27), //
+				RGB(0xB7, 0xB7, 0x37), //
+
+				RGB(0xFF,0xFF,0xFF),
+			};
+		
 
             struct appdata
             {
@@ -42,7 +68,7 @@
             struct v2f
             {
                 float2 uv : TEXCOORD0;
-                UNITY_FOG_COORDS(1)
+//                UNITY_FOG_COORDS(1)
                 float4 vertex : SV_POSITION;
             };
 
@@ -57,7 +83,7 @@
                 v2f o;
                 o.vertex = UnityObjectToClipPos(v.vertex);
                 o.uv = TRANSFORM_TEX(v.uv, _MainTex);
-                UNITY_TRANSFER_FOG(o,o.vertex);
+//                UNITY_TRANSFER_FOG(o,o.vertex);
                 return o;
             }
 

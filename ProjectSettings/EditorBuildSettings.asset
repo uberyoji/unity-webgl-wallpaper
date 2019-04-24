@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Dither/Dither.unity
+    guid: 8e1bc21df133a344d82c1d828f23fbad
+  - enabled: 1
     path: Assets/Geiss/Geiss.unity
     guid: 9adfe6eb92d28b9458eb9f782c9943ef
   - enabled: 1
