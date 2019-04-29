@@ -490,7 +490,7 @@ PlayerSettings:
   webGLMemorySize: 256
   webGLExceptionSupport: 0
   webGLNameFilesAsHashes: 0
-  webGLDataCaching: 0
+  webGLDataCaching: 1
   webGLDebugSymbols: 0
   webGLEmscriptenArgs: 
   webGLModulesDirectory: 
@@ -498,7 +498,7 @@ PlayerSettings:
   webGLAnalyzeBuildSize: 0
   webGLUseEmbeddedResources: 0
   webGLCompressionFormat: 1
-  webGLLinkerTarget: 1
+  webGLLinkerTarget: 0
   webGLThreadsSupport: 0
   scriptingDefineSymbols:
     1: UNITY_POST_PROCESSING_STACK_V2
