@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Dither/Dither2.unity
     guid: d6d38a2e523af724fb8400afe4a6b516
+  - enabled: 1
+    path: Assets/Dither/Dither3.unity
+    guid: 6daf34fcce1bb254e825b58a2d11ab2e
   m_configObjects: {}
